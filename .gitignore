@@ -1,0 +1,8 @@
+/idea/*
+/venv/*
+/.vscode/*
+__pycache__/*
+
+# Those are mine lol
+/repos.txt
+/requirements.txt

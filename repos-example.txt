@@ -1,0 +1,9 @@
+# This is a comment
+# And you can have empty lines
+
+# Format:
+# https://github.com/NAME/REPO VERSION_TAG
+https://github.com/psf/requests v2.30.0 # Also a comment. You can put one or less spaces between '#' and the version tag name.
+# You can have a repository url without the version, but the script will warn you about it.
+https://github.com/psf/requests # <- will show error but won't crash
+
