@@ -15,7 +15,7 @@ def check_new_release_version(repo, cur_ver):
         print_dict(d)
         return
     if (len(d) == 0):
-        print("[ERR]", repo, "no releases found in the reposiroty.")
+        print("[ERR]", repo, "no releases found in the repository.")
         return
     new_ver = d[0]["tag_name"]
     if (new_ver != cur_ver):
@@ -24,19 +24,23 @@ def check_new_release_version(repo, cur_ver):
         print("[---]", end=' ')
     print(repo, cur_ver, "->", new_ver)
 
-open("repos.txt", 'a').close() # Create file if not exist
-print("git-monitor-releases")
-print("It just checks the latest releases (tags) from the github repository page.")
-print("Include repositories urlwith a version (tag name) in repos.txt. See example in repos-example.txt.")
-print("Don't forget to manually change the version tag in repos.txt after downloading the update (if available).\n")
-for l in open("repos.txt", 'r'):
-    l = l.replace('\n', '').replace(" #", '#').split('#')[0]
-    if (l == ''):
-        continue
-    arr = l.split(' ', 1)
-    if (len(arr) < 2):
-        print("[ERR]", l, ": put the tag name from release page.")
-        continue
-    repo, cur_ver = arr
-    check_new_release_version(repo, cur_ver)
+def main(file):
+    open(file, 'a').close() # Create file if not exist
+    print("github-monitor-releases")
+    print("It just checks the latest releases (tags) from the github repository page.")
+    print("Include repositories urls with a version (tag name) in", file, ". See example in repos-example.txt.")
+    print("Don't forget to manually change the version tag in", file, "after downloading the update (if available).\n")
+    for l in open(file, 'r'):
+        l = l.replace('\n', '').replace(" #", '#').split('#')[0]
+        if (l == ''):
+            continue
+        arr = l.split(' ', 1)
+        if (len(arr) < 2):
+            print("[ERR]", l, ": put the tag name from release page.")
+            continue
+        repo, cur_ver = arr
+        check_new_release_version(repo, cur_ver)
+
+if (__name__ == "__main__"):
+    main("repos.txt")
 
